@@ -88,9 +88,15 @@ export default function PerfumeDetail() {
 
       <div className="hero-image-placeholder">
          {imageUrl ? (
-            <img src={imageUrl} alt={perfume.name} style={{width:'100%', height:'100%', objectFit:'cover'}} />
+            <>
+              <div style={{
+                position: 'absolute', top: '-10%', left: '-10%', right: '-10%', bottom: '-10%',
+                backgroundImage: `url(${imageUrl})`, backgroundSize: 'cover', backgroundPosition: 'center', filter: 'blur(15px)', opacity: 0.4
+              }}></div>
+              <img src={imageUrl} alt={perfume.name} style={{width:'100%', height:'100%', objectFit:'contain', position: 'relative', zIndex: 1, padding: '1rem'}} />
+            </>
          ) : (
-            <div style={{display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', height:'100%', gap:'1rem'}}>
+            <div style={{display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', height:'100%', gap:'1rem', position: 'relative', zIndex: 1}}>
               <Droplet size={64} strokeWidth={1} color="#aaa" />
               <a 
                 href={`https://www.google.com/search?tbm=isch&q=${encodeURIComponent(perfume.name + ' ' + perfume.brand + ' perfume bottle')}`} 
