@@ -90,7 +90,24 @@ export default function PerfumeDetail() {
          {imageUrl ? (
             <img src={imageUrl} alt={perfume.name} style={{width:'100%', height:'100%', objectFit:'cover'}} />
          ) : (
-            <Droplet size={64} strokeWidth={1} color="#aaa" />
+            <div style={{display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', height:'100%', gap:'1rem'}}>
+              <Droplet size={64} strokeWidth={1} color="#aaa" />
+              <a 
+                href={`https://www.google.com/search?tbm=isch&q=${encodeURIComponent(perfume.name + ' ' + perfume.brand + ' perfume bottle')}`} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                style={{
+                  color: 'var(--primary)', 
+                  textDecoration: 'none', 
+                  fontSize: '0.9rem',
+                  padding: '0.5rem 1rem',
+                  border: '1px solid var(--primary)',
+                  borderRadius: '20px'
+                }}
+              >
+                Buscar foto en Google
+              </a>
+            </div>
          )}
       </div>
 
