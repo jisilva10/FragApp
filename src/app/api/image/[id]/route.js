@@ -21,24 +21,22 @@ export async function GET(request, { params }) {
     if (perfume.image_url) {
       return NextResponse.json({ url: perfume.image_url });
     }
+    // 3. Check if we have the SerpApi key
+    const serpApiKey = process.env.SERPAPI_KEY;
     
-    // 3. If not, check if we have the API keys to search Google
-    const apiKey = process.env.GOOGLE_API_KEY;
-    const cx = process.env.GOOGLE_CX;
-    
-    if (!apiKey || !cx) {
+    if (!serpApiKey) {
        // Return 404 so frontend knows to use placeholder
-       return NextResponse.json({ error: 'Google API Keys not configured' }, { status: 404 });
+       return NextResponse.json({ error: 'SERPAPI_KEY not configured' }, { status: 404 });
     }
     
-    // 4. Fetch from Google Custom Search
+    // 4. Fetch from SerpApi
     // We add "perfume bottle high quality studio" to get professional images
-    const query = encodeURIComponent(`${perfume.name} ${perfume.brand} perfume bottle high quality studio`);
-    const googleRes = await fetch(`https://customsearch.googleapis.com/customsearch/v1?cx=${cx}&key=${apiKey}&q=${query}&searchType=image&num=1`);
-    const googleData = await googleRes.json();
-    
-    if (googleData.items && googleData.items.length > 0) {
-      const imageUrl = googleData.items[0].link;
+    const query = `${perfume.name} ${perfume.brand} perfume bottle high quality studio`;
+    const response = await fetch(`https://serpapi.com/search.json?q=${encodeURIComponent(query)}&tbm=isch&ijn=0&api_key=${serpApiKey}`);
+    const data = await response.json();
+
+    if (data.images_results && data.images_results.length > 0) {
+      const imageUrl = data.images_results[0].original;
       
       // 5. Save to Supabase (cache it forever)
       await supabaseAdmin
@@ -48,8 +46,8 @@ export async function GET(request, { params }) {
         
       return NextResponse.json({ url: imageUrl });
     } else {
-      console.error('Google API Error or empty:', googleData);
-      return NextResponse.json({ error: 'No image found', debug: googleData }, { status: 404 });
+      console.error('SerpApi Error or empty:', data);
+      return NextResponse.json({ error: 'No image found', debug: data }, { status: 404 });
     }
     
   } catch (err) {
