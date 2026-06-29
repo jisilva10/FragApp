@@ -1,0 +1,94 @@
+.top-bar {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 10;
+}
+
+.top-bar .btn-icon {
+  background-color: var(--surface-color);
+  box-shadow: var(--shadow-sm);
+}
+
+.hero-image-placeholder {
+  width: 100%;
+  height: 250px;
+  background-color: #f0f0f4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.detail-header {
+  margin-bottom: 1.5rem;
+}
+
+.detail-header h1 {
+  font-size: 1.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.meta {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.rating {
+  background: #fff9e6;
+  color: #b78103;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.section {
+  margin-bottom: 2rem;
+}
+
+.section h3 {
+  margin-bottom: 1rem;
+}
+
+.pyramid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.pyramid-level {
+  padding: 0.75rem 1rem;
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.pyramid-level strong {
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  display: block;
+  margin-bottom: 0.15rem;
+}
+
+.accords-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag-accord {
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
+}
+
+.description-text {
+  line-height: 1.6;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
