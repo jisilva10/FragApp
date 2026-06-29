@@ -48,6 +48,7 @@ export async function GET(request, { params }) {
         
       return NextResponse.json({ url: imageUrl });
     } else {
+      console.error('Google API Error or empty:', googleData);
       return NextResponse.json({ error: 'No image found' }, { status: 404 });
     }
     
